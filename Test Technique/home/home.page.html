@@ -1,0 +1,38 @@
+<ion-content>
+    <header>
+        <div class="header-left-part">
+            <span>Todo list</span>
+        </div>
+        <div class="header-right-part">
+            <ion-icon (click)="onCreateTask()" class="right-icon" name="add"></ion-icon>
+        </div>
+    </header>
+    <div class='content'>
+        <div class="task" tappable (click)="onRedirect('/task/'+task.id, task.id)" *ngFor="let task of tasks">
+            <div class="task-body">
+                <div class="task-left-part">
+                    <div class="task-header">
+                        <span>{{task.title}}</span>
+                    </div>
+                    <div class="task-description">
+                        <span>{{task.description}}</span>
+                    </div>
+                </div>
+                <div class="task-right-part">
+                    <ion-icon tappable (click)="onRemoveTask(task.id, $event)" name="trash"></ion-icon>
+                </div>
+            </div>
+            <div class="task-bottom">
+                <span class="priority-badge" [ngStyle]="{'background-color': getPriorityColor(task.priority.id)}">{{task.priority.title}}</span>
+                <span class="task-date">{{task.targetDate | unixDate}}</span>
+            </div>
+        </div>
+        <div *ngIf="tasks?.length === 0" class="info">
+            <img src="./../../assets/arrow.png" alt="">
+            <div>
+                <h3>No tasks :(</h3>
+                <h4>You can create the first one!</h4>
+            </div>
+        </div>
+    </div>
+</ion-content>
